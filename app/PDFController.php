@@ -10,7 +10,7 @@ class PDFController
 {
     public static function create(array $data): ?string
     {
-
+        /** Генерация HTML для PDF */
         $body  = '<body style="font-family: DejaVu Sans; display: flex; flex-direction: column; column-gap: 20px">';
         $body .=    '<div style="height:100px">';
         $body .=        '<img style="float:right" height=100 src=' . self::getBase64image($data['logo']) . ' >';
@@ -73,7 +73,7 @@ class PDFController
         $body .=    '</div>';
         $body .= '</body>';
 
-
+        /** создание самого PDF файла */
         $dompdf = new Dompdf();
         $dompdf->setPaper("letter", "portrait");
         $dompdf->loadHtml($body);

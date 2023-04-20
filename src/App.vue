@@ -83,17 +83,19 @@ export default {
       e.preventDefault()
       const formData = new FormData(e.target)
       this.loading = true;
-
+      /** Скрытие всех ошибок*/
       document.querySelectorAll('.error').forEach(e => e.remove());
 
       axios.post( this.host, formData)
           .then( (res) => {
             if (res.data.errors && res.data.errors.length > 0){
+              /** Отображение ошибок*/
               for (const error of res.data.errors) {
                 const input = document.querySelector(`input[name=${error.field}]`)
                 input.parentElement.insertAdjacentHTML('afterend', `<span class="error">${error.reason}</span>`);
               }
             } else {
+              /** Отображение результата*/
               this.message = res.data.message
               let popup = document.querySelector('#popup')
               popup.style.display = 'block'

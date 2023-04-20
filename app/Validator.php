@@ -8,12 +8,13 @@ class Validator
 {
     public static function validate(array $request, array $files): array|string
     {
-
+        /** Возвращаемый массив*/
         $response = [
             'errors' => [],
             'fields' => [],
         ];
 
+        /** Поля для валидции и правила для них*/
         $rules = [
             'executor_act_id' => 'integer|30',
             'document_date' => 'string|50',
@@ -49,7 +50,7 @@ class Validator
             'customer_seal' => 'image',
         ];
 
-
+        /** Перебор полей из реквеста и их валидация с помощью вышеуказанных правил*/
         foreach ($request as $key => $field) {
             if (empty($field)) {
                 $response['errors'][] = ['field' => $key, 'reason' => 'Укажите значение'];
@@ -87,7 +88,7 @@ class Validator
             $response['fields'][$key] = $field;
 
         }
-
+        /** Перебор файлов из реквеста */
         foreach ($files as $key => $file){
             if (empty($file['size'])){
                 $response['errors'][] = ['field' => $key, 'reason' => 'Загрузите изображение'];

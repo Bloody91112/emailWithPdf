@@ -12,6 +12,7 @@ class MailController
 
     public static function send(string $document, string $customerEmail, string $customerName): bool
     {
+        /** Настройка smpt и данных для письма*/
         $mail = new PHPMailer(true);
         $mail->CharSet = 'UTF-8';
         $mail->isSMTP();
